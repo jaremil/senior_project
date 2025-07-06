@@ -1,0 +1,108 @@
+/* Importing Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Lexend+Exa:wght@100..900&display=swap');
+
+/* Custom Properties */
+
+:root {
+  --base_color: #abcda5;
+  --primary_color: #d5d5d5;
+  --accent_color: #658b67;
+  --footer_color: #cce6c8;
+  --background_color: #f5f7f9;
+  --heading_font: "Lexend Exa", Arial, sans-serif;
+  --body_font: Archivo, Arial, sans-serif;
+}
+
+/* Title Animation */
+
+.container {
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  margin-top: 10%;
+}
+
+.text {
+  font-family: var(--heading_font);
+  display: block;
+  color: var(--base_color);
+  font-size: 500%;
+  animation: text 3s 1;
+  text-align: center;
+}
+
+@keyframes text {
+  0% {
+    margin-bottom: 5px;
+  }
+  50% {
+    letter-spacing: 5px;
+    margin-bottom: 5px;
+    color: #cfe4cc;
+  }
+}
+
+/* Navigation Animation */
+
+.logo {
+  width: 40px;
+}
+
+.navBar {
+  font-size: 16px;
+  font-family: var(--heading_font);
+  font-weight: 500;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  transition: color 0.3s ease;
+}
+
+.navBar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 0;
+  background-color: #abcda5;
+  transition: width 0.4s ease-in-out;
+}
+
+.navBar:hover::after {
+  width: 100%;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 25px auto 0;
+  padding: 0;
+  font-size: 15px;
+  
+}
+
+nav ul li a {
+  color: var(--nav-color);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.navBar:hover::after{
+  animation: underline_nav 0.4s ease-in-out forwards;
+} 
+
+@keyframes underline_nav {
+  from {
+      width: 0;
+      background-color: #ccf5c6;
+  }
+  to {
+      width: 100%;
+      background-color: #abcda5;
+  }
+}
