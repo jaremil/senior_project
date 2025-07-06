@@ -28,7 +28,7 @@ routes.get('/senior_project/start', (req, res) => {
 });
 
 //LOG OUT
-routes.get('/logout.html', (req, res) => {
+routes.get('/senior_project/logout.html', (req, res) => {
   req.logout(() => {
     res.redirect('./logout.html');
   });
