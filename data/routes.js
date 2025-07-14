@@ -9,17 +9,17 @@ routes.get("/", async (req, res) => {
 });
 
 // GOOGLE LOGIN ROUTE
-routes.get("peachletpages.onrender.com/auth/signin", passport.authenticate('google', { scope: ['profile', 'email'] }));
+routes.get("/auth/signin", passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 // CALLBACK AUTHICATION ROUTE
-routes.get('peachletpages.onrender.com/auth/',
+routes.get('/auth/',
   passport.authenticate('google', { failureRedirect: '/' }),
   (req, res) => {
     res.redirect('/start');
   });
 
 // PROFILE
-routes.get('peachletpages.onrender.com/start', (req, res) => {
+routes.get('/start', (req, res) => {
   if (!req.isAuthenticated()) {
     return res.redirect('/');
   }
@@ -28,7 +28,7 @@ routes.get('peachletpages.onrender.com/start', (req, res) => {
 });
 
 //LOG OUT
-routes.get('peachletpages.onrender.com/logout.html', (req, res) => {
+routes.get('/logout.html', (req, res) => {
   req.logout(() => {
     res.redirect('./logout.html');
   });
@@ -36,7 +36,7 @@ routes.get('peachletpages.onrender.com/logout.html', (req, res) => {
 
 const path = require('path');
 
-routes.get("peachletpages.onrender.com/start.html", (req, res) => {
+routes.get("/start.html", (req, res) => {
   if (!req.isAuthenticated()) {
     return res.redirect('/');
   }
