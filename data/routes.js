@@ -9,7 +9,7 @@ routes.get("/", async (req, res) => {
 });
 
 // GOOGLE LOGIN ROUTE
-routes.get("peachletpages.onrender.com/signin", passport.authenticate('google', { scope: ['profile', 'email'] }));
+routes.get("peachletpages.onrender.com/auth/signin", passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 // CALLBACK AUTHICATION ROUTE
 routes.get('peachletpages.onrender.com/auth/',
