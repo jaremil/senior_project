@@ -6,7 +6,7 @@ const passport = require('passport');
 const session = require('express-session');
 // const mongoose = require('mongoose');
 const express = require('express');
-require('./config/google_auth.js');
+require('./google_auth.js');
 
 const app = express();
 
@@ -24,7 +24,7 @@ app.set('views', __dirname + '/views');
 app.set('layout', 'layouts/layout');
 app.use(express.static('public'));
 
-const projectsRouter = require('./routes/project')
+const projectsRouter = require('./routes.js')
 app.use('/', projectsRouter);
 
 app.listen(process.env.PORT || 3000);

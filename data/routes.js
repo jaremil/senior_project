@@ -1,6 +1,6 @@
 const passport = require('passport');
 
-const { User, Recipe } = require("../models/project");
+const { User, Recipe } = require("./connection");
 
 const routes = require("express").Router();
 
@@ -33,7 +33,6 @@ routes.get('/senior_project/logout.html', (req, res) => {
     res.redirect('./logout.html');
   });
 });
-
 
 const path = require('path');
 

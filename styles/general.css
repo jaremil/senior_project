@@ -106,3 +106,48 @@ nav ul li a {
       background-color: #abcda5;
   }
 }
+
+/* page refresh animation */
+
+.refresh_animation {
+  background-color: red;
+  transform: translateX(-0%);
+  transition: transform 1s ease;
+}
+
+.refresh_animation.slide-in {
+  transform: translateX(0);
+}
+
+.refresh_animation.slide-out {
+  transform: translateX(-100%);
+  transition: transform 1s ease;
+}
+
+/* login */
+
+/* Modal container (hidden by default) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+/* Modal content box */
+.modal-content {
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  width: 300px;
+  border-radius: 8px;
+}
+
+/* Close button */
+.close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
