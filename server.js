@@ -5,6 +5,7 @@ if (process.env.NODE_ENV !== 'production') {
 const passport = require('passport');
 const session = require('express-session');
 // const mongoose = require('mongoose');
+const path = require('path');
 const express = require('express');
 var app = express();
 require('./data/google_auth.js');
@@ -32,10 +33,6 @@ const projectsRouter = require('./data/routes.js')
 app.use('/', projectsRouter);
 
 // PAGES
-
-const path = require('path');
-const express = require('express');
-const app = express();
 
 app.use(express.static(path.join(__dirname, 'pages')));
 
