@@ -24,7 +24,7 @@ routes.get('/start', (req, res) => {
     return res.redirect('/');
   }
   //where it goes after they log in
-  res.redirect('./logout.html');
+  res.redirect('./start.html');
 });
 
 //LOG OUT
