@@ -30,12 +30,3 @@ app.use(express.static('public'));
 
 const projectsRouter = require('./data/routes.js')
 app.use('/', projectsRouter);
-
-// // PAGES
-
-// app.use(express.static(path.join(__dirname, 'pages')));
-
-// // Optional: fallback to start.html
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'pages', 'start.html'));
-// });
