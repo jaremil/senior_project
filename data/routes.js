@@ -18,7 +18,7 @@ routes.get('/auth/',
   passport.authenticate('google', { failureRedirect: '/' }),
   (req, res) => {
     res.redirect('/start');
-  });
+});
 
 // PROFILE
 routes.get('/start', (req, res) => {
