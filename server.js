@@ -5,7 +5,6 @@ if (process.env.NODE_ENV !== 'production') {
 const passport = require('passport');
 const session = require('express-session');
 // const mongoose = require('mongoose');
-const path = require('path');
 const express = require('express');
 var app = express();
 require('./data/google_auth.js');
@@ -32,11 +31,11 @@ app.use(express.static('public'));
 const projectsRouter = require('./data/routes.js')
 app.use('/', projectsRouter);
 
-// PAGES
+// // PAGES
 
-app.use(express.static(path.join(__dirname, 'pages')));
+// app.use(express.static(path.join(__dirname, 'pages')));
 
-// Optional: fallback to start.html
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'pages', 'start.html'));
-});
+// // Optional: fallback to start.html
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'pages', 'start.html'));
+// });
