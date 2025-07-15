@@ -54,4 +54,20 @@ routes.get("/profile.html", (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'profile.html'));
 });
 
+routes.get("/scan.html", (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
+  
+  res.sendFile(path.resolve(__dirname, '..', 'scan.html'));
+});
+
+routes.get("/social.html", (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
+  
+  res.sendFile(path.resolve(__dirname, '..', 'social.html'));
+});
+
 module.exports = routes;
