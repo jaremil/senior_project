@@ -2,9 +2,11 @@ const passport = require('passport');
 
 const path = require('path');
 
-const app = express();
-
 const { User, Recipe } = require("./connection");
+
+const express = require('express');
+
+const app = express();
 
 const routes = require("express").Router();
 
