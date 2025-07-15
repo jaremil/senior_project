@@ -1,3 +1,12 @@
+const express = require('express');
+const path = require('path');
+const app = express();
+
+// Serve the "styles" folder as static
+app.use('/styles', express.static(path.join(__dirname, 'styles')));
+
+
+
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
@@ -8,8 +17,6 @@ const session = require('express-session');
 const express = require('express');
 var app = express();
 require('./data/google_auth.js');
-const path = require('path');
-
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000')
