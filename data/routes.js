@@ -46,8 +46,6 @@ routes.get("/start.html", (req, res) => {
 
 // PAGES
 
-const path = require('path');
-
 routes.get("/profile.html", (req, res) => {
   if (!req.isAuthenticated()) {
     return res.redirect('/');
