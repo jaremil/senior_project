@@ -11,6 +11,7 @@ var app = express();
 require('./data/google_auth.js');
 
 app.use('/styles', express.static(path.join(__dirname, 'styles')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000')
