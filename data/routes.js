@@ -46,10 +46,14 @@ routes.get("/start.html", (req, res) => {
 
 // PAGES
 
-routes.get('/profile', (req, res) => {
-  req.logout(() => {
-    res.redirect('./profile.html');
-  });
+const path = require('path');
+
+routes.get("/profile.html", (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
+  
+  res.sendFile(path.resolve(__dirname, '..', 'profile.html'));
 });
 
 module.exports = routes;
