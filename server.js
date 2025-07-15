@@ -10,7 +10,6 @@ const path = require('path');
 var app = express();
 require('./data/google_auth.js');
 
-// Serve the "styles" folder as static
 app.use('/styles', express.static(path.join(__dirname, 'styles')));
 
 app.listen(3000, () => {
