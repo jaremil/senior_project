@@ -4,11 +4,8 @@
 /* Custom Properties */
 
 :root {
-  --base_color: #abcda5;
-  --primary_color: #d5d5d5;
-  --accent_color: #658b67;
-  --footer_color: #cce6c8;
-  --background_color: #f5f7f9;
+  --base_color: #118f8f;
+  --accent_color: #65c6c6;
   --heading_font: "Lexend Exa", Arial, sans-serif;
   --body_font: Archivo, Arial, sans-serif;
 }
@@ -39,7 +36,7 @@
   50% {
     letter-spacing: 5px;
     margin-bottom: 5px;
-    color: #cfe4cc;
+    color: #65c6c6;
   }
 }
 
@@ -67,7 +64,7 @@
   bottom: -2px;
   height: 2px;
   width: 0;
-  background-color: #abcda5;
+  background-color: var(--accent_color);
   transition: width 0.4s ease-in-out;
 }
 
@@ -99,15 +96,15 @@ nav ul li a {
 @keyframes underline_nav {
   from {
       width: 0;
-      background-color: #ccf5c6;
+      background-color: #8fffff;
   }
   to {
       width: 100%;
-      background-color: #abcda5;
+      background-color: var(--accent_color);;
   }
 }
 
-/* page refresh animation */
+/* page refresh animation
 
 .refresh_animation {
   background-color: red;
@@ -122,32 +119,42 @@ nav ul li a {
 .refresh_animation.slide-out {
   transform: translateX(-100%);
   transition: transform 1s ease;
+} */
+
+/* search bar */
+.search-container {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  min-width: none;
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 40px;
+  padding: 0px 0px 0px 8px;
+  box-shadow: 0 4px 12px rgba(67, 67, 103, 0.146);
 }
 
-/* login */
-
-/* Modal container (hidden by default) */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0,0,0,0.5);
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 10px;
+  background: transparent;
 }
 
-/* Modal content box */
-.modal-content {
-  background-color: white;
-  margin: 15% auto;
-  padding: 20px;
-  width: 300px;
-  border-radius: 8px;
+.search-button {
+  background: var(--base_color); 
+  border: none;
+  border-radius: 12px 100px 100px 12px; 
+  transition: background .5s ease;
 }
 
-/* Close button */
-.close {
-  float: right;
-  font-size: 24px;
-  cursor: pointer;
+.search-button:hover {
+  background: var(--accent_color); 
+}
+
+.search-icon {
+  width: 30px;
+  margin-top: 5px;
 }
