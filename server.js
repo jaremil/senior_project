@@ -28,9 +28,5 @@ app.set('views', __dirname + '/views');
 app.set('layout', 'layouts/layout');
 app.use(express.static('public'));
 
-function serveStaticAssets(app) {
-  app.use(express.static(path.join(__dirname, 'static')));
-}
-
 const projectsRouter = require('./data/routes.js')
 app.use('/', projectsRouter);
