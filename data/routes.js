@@ -1,5 +1,7 @@
 const passport = require('passport');
 
+const path = require('path');
+
 const { User, Recipe } = require("./connection");
 
 const routes = require("express").Router();
@@ -34,8 +36,6 @@ routes.get('/logout', (req, res) => {
   });
 });
 
-const path = require('path');
-
 routes.get("/start.html", (req, res) => {
   if (!req.isAuthenticated()) {
     return res.redirect('/');
@@ -69,5 +69,9 @@ routes.get("/social.html", (req, res) => {
   
   res.sendFile(path.resolve(__dirname, '..', 'social.html'));
 });
+
+// CSS folder to static
+
+app.use(express.static(path.join(__dirname, 'styles')));
 
 module.exports = routes;
