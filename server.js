@@ -1,12 +1,3 @@
-const express = require('express');
-const path = require('path');
-const app = express();
-
-// Serve the "styles" folder as static
-app.use('/styles', express.static(path.join(__dirname, 'styles')));
-
-
-
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
@@ -15,8 +6,12 @@ const passport = require('passport');
 const session = require('express-session');
 // const mongoose = require('mongoose');
 const express = require('express');
+const path = require('path');
 var app = express();
 require('./data/google_auth.js');
+
+// Serve the "styles" folder as static
+app.use('/styles', express.static(path.join(__dirname, 'styles')));
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000')
