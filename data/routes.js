@@ -30,7 +30,7 @@ routes.get('/start', (req, res) => {
 //LOG OUT
 routes.get('/logout', (req, res) => {
   req.logout(() => {
-    res.redirect('./logout.html');
+    res.redirect('/');
   });
 });
 
