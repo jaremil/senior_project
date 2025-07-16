@@ -7,4 +7,23 @@ db.on("error", (error) => console.error(error));
 const User = mongoose.model('User', { displayName: String, googleId: String, email: String, password: String })
 const Recipe = mongoose.model('Recipe', { recipeName: String, displayName: String,  });
 
+const express = require('express');
+const reviewsRouter = express.Router();
+const {
+  getAll,
+  getSingle,
+  create,
+  update,
+  remove,
+} = require('../controllers/reviews');
+
+
+reviewsRouter.get('/', getAll);
+reviewsRouter.get('/:id', getSingle);
+reviewsRouter.post('/', create);
+reviewsRouter.put('/:id', update);
+reviewsRouter.delete('/:id', remove);
+
+module.exports = reviewsRouter;
+
 module.exports = { User, Recipe }
