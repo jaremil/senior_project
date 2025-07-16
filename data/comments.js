@@ -140,4 +140,10 @@ const remove = async (req, res) => {
   }
 };
 
-module.exports = { getAll, getSingle, create, update, remove };
+module.exports = {
+  getAll,
+  getSingle,
+  create,
+  update,
+  remove
+};

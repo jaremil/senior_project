@@ -72,6 +72,4 @@ routes.get("/social.html", (req, res) => {
 
 // comments
 
-
-
-module.exports = routes;
+module.exports = commentsRouter, routes;

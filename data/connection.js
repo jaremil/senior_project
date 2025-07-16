@@ -14,7 +14,7 @@ const {
   getSingle,
   create,
   update,
-  remove,
+  remove
 } = require('./comments.js');
 
 
