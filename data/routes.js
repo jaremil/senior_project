@@ -10,6 +10,30 @@ routes.get("/", async (req, res) => {
   res.send(`<a href="/auth/signin">Login with Google</a>`);
 });
 
+routes.get("/", (req, res) => {
+  res.send(`
+    <html>
+      <head>
+        <style>
+          .login-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4285F4;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-family: sans-serif;
+          }
+        </style>
+      </head>
+      <body>
+        <a class="login-btn" href="/auth/signin">Login with Google</a>
+      </body>
+    </html>
+  `);
+});
+
+
 // GOOGLE LOGIN ROUTE
 routes.get("/auth/signin", passport.authenticate('google', { scope: ['profile', 'email'] }));
 
