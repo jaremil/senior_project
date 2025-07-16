@@ -70,6 +70,4 @@ routes.get("/social.html", (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'social.html'));
 });
 
-// comments
-
-// module.exports = commentsRouter, routes;
+module.exports = routes;
