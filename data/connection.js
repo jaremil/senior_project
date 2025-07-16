@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI);
 
-const commentsRouter = express.Router();
-
 const db = mongoose.connection;
 db.on("error", (error) => console.error(error));
 
@@ -17,6 +15,7 @@ const {
   remove
 } = require('./comments.js');
 
+const commentsRouter = express.Router();
 
 commentsRouter.get('/', getAll);
 commentsRouter.get('/:id', getSingle);
