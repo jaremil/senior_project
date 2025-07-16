@@ -35,5 +35,5 @@ app.use(express.static('styles'));
 const projectsRouter = require('./data/routes.js')
 app.use('/', projectsRouter);
 
-const { commentsRouter } = require('./data/connection.js'); 
-app.use('/comments', commentsRouter);
+// const { commentsRouter } = require('./data/connection.js'); 
+// app.use('/comments', commentsRouter);
