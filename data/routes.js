@@ -10,8 +10,6 @@ routes.get("/", async (req, res) => {
   res.send(`<a href="/auth/signin">Login with Google</a>`);
 });
 
-// <a href="/auth/signin">Login with Google</a>
-
 // GOOGLE LOGIN ROUTE
 routes.get("/auth/signin", passport.authenticate('google', { scope: ['profile', 'email'] }));
 
