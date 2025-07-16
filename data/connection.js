@@ -1,7 +1,7 @@
-const commentsRouter = express.Router();
-
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI);
+
+const commentsRouter = express.Router();
 
 const db = mongoose.connection;
 db.on("error", (error) => console.error(error));
