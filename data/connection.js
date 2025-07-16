@@ -8,22 +8,22 @@ const User = mongoose.model('User', { displayName: String, googleId: String, ema
 const Recipe = mongoose.model('Recipe', { recipeName: String, displayName: String,  });
 
 const express = require('express');
-const reviewsRouter = express.Router();
+const commentsRouter = express.Router();
 const {
   getAll,
   getSingle,
   create,
   update,
   remove,
-} = require('reviews');
+} = require('/comments');
 
 
-reviewsRouter.get('/', getAll);
-reviewsRouter.get('/:id', getSingle);
-reviewsRouter.post('/', create);
-reviewsRouter.put('/:id', update);
-reviewsRouter.delete('/:id', remove);
+commentsRouter.get('/', getAll);
+commentsRouter.get('/:id', getSingle);
+commentsRouter.post('/', create);
+commentsRouter.put('/:id', update);
+commentsRouter.delete('/:id', remove);
 
-module.exports = reviewsRouter;
+module.exports = commentsRouter;
 
 module.exports = { User, Recipe }

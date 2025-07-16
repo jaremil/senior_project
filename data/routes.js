@@ -70,7 +70,7 @@ routes.get("/social.html", (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'social.html'));
 });
 
-// reviews
+// comments
 
 
 
