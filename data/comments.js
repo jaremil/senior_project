@@ -1,4 +1,4 @@
-const { client } = require('connection');
+const { client } = require('./connection');
 const { ObjectId } = require('mongodb');
 
 // get all comments
