@@ -7,7 +7,7 @@ const { User, Recipe } = require("./connection");
 const routes = require("express").Router();
 
 routes.get("/", async (req, res) => {
-  res.send(`<a href="/auth/signin">Login with Google</a>`);
+  res.send(`<a class="logout-btn" href="/auth/signin">Login with Google</a>`);
 });
 
 // GOOGLE LOGIN ROUTE
