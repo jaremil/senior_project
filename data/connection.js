@@ -30,37 +30,24 @@
 //   Recipe
 // };
 
-const express = require('express');
-const mongoose = require('mongoose');
-
+const express = require('express'); 
 const commentsRouter = express.Router();
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGODB_URI);
 
 const db = mongoose.connection;
-db.on('error', (error) => console.error(error));
-db.once('open', () => console.log('Connected to MongoDB'));
+db.on("error", (error) => console.error(error));
 
-const User = mongoose.model('User', {
-  displayName: String,
-  googleId: String,
-  email: String,
-});
-
-const Recipe = mongoose.model('Recipe', {
-  recipeName: String,
-  displayName: String,
-});
+const User = mongoose.model('User', { displayName: String, googleId: String, email: String });
+const Recipe = mongoose.model('Recipe', { recipeName: String, displayName: String });
 
 const {
   getAll,
   getSingle,
   create,
   update,
-  remove,
+  remove
 } = require('./comments.js');
 
 commentsRouter.get('/', getAll);
@@ -72,5 +59,5 @@ commentsRouter.delete('/:id', remove);
 module.exports = {
   commentsRouter,
   User,
-  Recipe,
+  Recipe
 };
