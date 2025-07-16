@@ -24,6 +24,8 @@ commentsRouter.post('/', create);
 commentsRouter.put('/:id', update);
 commentsRouter.delete('/:id', remove);
 
-module.exports = commentsRouter;
-
-module.exports = { User, Recipe }
+module.exports = {
+  commentsRouter,
+  User,
+  Recipe
+};
