@@ -7,7 +7,7 @@ const getAll = async (req, res) => {
   try {
     const reviews = await client
       .db('recipeReviewDB')
-      .collection('reviews')
+      .collection('reviews.js')
       .find()
       .toArray();
     res.json({ reviews });
