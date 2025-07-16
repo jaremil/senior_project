@@ -1,3 +1,5 @@
+const commentsRouter = express.Router();
+
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -6,9 +8,7 @@ db.on("error", (error) => console.error(error));
 
 const User = mongoose.model('User', { displayName: String, googleId: String, email: String })
 const Recipe = mongoose.model('Recipe', { recipeName: String, displayName: String,  });
-
 const express = require('express');
-const commentsRouter = express.Router();
 const {
   getAll,
   getSingle,
