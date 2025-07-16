@@ -1,21 +1,66 @@
+// const express = require('express');
+// const commentsRouter = express.Router();
+
+// const mongoose = require('mongoose');
+// mongoose.connect(process.env.MONGODB_URI);
+
+// const db = mongoose.connection;
+// db.on("error", (error) => console.error(error));
+
+// const User = mongoose.model('User', { displayName: String, googleId: String, email: String })
+// const Recipe = mongoose.model('Recipe', { recipeName: String, displayName: String,  });
+
+// const {
+//   getAll,
+//   getSingle,
+//   create,
+//   update,
+//   remove
+// } = require('./comments.js');
+
+// commentsRouter.get('/', getAll);
+// commentsRouter.get('/:id', getSingle);
+// commentsRouter.post('/', create);
+// commentsRouter.put('/:id', update);
+// commentsRouter.delete('/:id', remove);
+
+// module.exports = {
+//   commentsRouter,
+//   User,
+//   Recipe
+// };
+
 const express = require('express');
+const mongoose = require('mongoose');
+
 const commentsRouter = express.Router();
 
-const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const db = mongoose.connection;
-db.on("error", (error) => console.error(error));
+db.on('error', (error) => console.error(error));
+db.once('open', () => console.log('Connected to MongoDB'));
 
-const User = mongoose.model('User', { displayName: String, googleId: String, email: String })
-const Recipe = mongoose.model('Recipe', { recipeName: String, displayName: String,  });
+const User = mongoose.model('User', {
+  displayName: String,
+  googleId: String,
+  email: String,
+});
+
+const Recipe = mongoose.model('Recipe', {
+  recipeName: String,
+  displayName: String,
+});
 
 const {
   getAll,
   getSingle,
   create,
   update,
-  remove
+  remove,
 } = require('./comments.js');
 
 commentsRouter.get('/', getAll);
@@ -27,5 +72,5 @@ commentsRouter.delete('/:id', remove);
 module.exports = {
   commentsRouter,
   User,
-  Recipe
+  Recipe,
 };
