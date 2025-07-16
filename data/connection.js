@@ -15,7 +15,7 @@ const {
   create,
   update,
   remove,
-} = require('../controllers/reviews');
+} = require('reviews');
 
 
 reviewsRouter.get('/', getAll);
