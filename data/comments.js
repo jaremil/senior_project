@@ -6,8 +6,8 @@ const { ObjectId } = require('mongodb');
 const getAll = async (req, res) => {
   try {
     const comments = await client
-      .db('recipeCommentDB')
-      .collection('comments.js')
+      .db('peachletpages')
+      .collection('comments')
       .find()
       .toArray();
     res.json({ comments });
@@ -27,7 +27,7 @@ const getSingle = async (req, res) => {
   }
 
   const comment = await client
-    .db('recipeCommentDB')
+    .db('peachletpages')
     .collection('comments')
     .findOne({ _id: new ObjectId(id) });
 
@@ -44,11 +44,11 @@ const create = async (req, res) => {
   if (
     !req.body.userId ||
     !req.body.recipeId ||
-    !req.body.commentComment 
+    !req.body.comment 
   ) {
     return res.status(400).json({
       error:
-        'All fields are required: (userId, recipeId, commentComment)',
+        'All fields are required: (userId, recipeId, comment)',
     });
   }
 
@@ -62,13 +62,13 @@ const create = async (req, res) => {
   const newComment = {
     userId: new ObjectId(req.body.userId),
     recipeId: new ObjectId(req.body. recipeId),
-    commentComment: req.body.commentComment,
+    comment: req.body.comment,
     createdDate: new Date(),
     updatedDate: new Date(),
   };
 
   const result = await client
-    .db('recipeCommentDB')
+    .db('peachletpages')
     .collection('comments')
     .insertOne(newComment);
   if (result.acknowledged) {
@@ -84,11 +84,11 @@ const update = async (req, res) => {
   if (
     !req.body.userId ||
     !req.body. recipeId ||
-    !req.body.commentComment 
+    !req.body.comment 
   ) {
     return res.status(400).json({
       error:
-        'All fields are required: (userId, recipeId, commentComment)',
+        'All fields are required: (userId, recipeId, comment)',
     });
   }
 
@@ -105,11 +105,11 @@ const update = async (req, res) => {
   const updatedComment = {
     userId: new ObjectId(req.body.userId),
      recipeId: new ObjectId(req.body. recipeId),
-    commentComment: req.body.commentComment,
+    comment: req.body.comment,
     updatedDate: new Date(),
   };
   const result = await client
-    .db('recipeCommentDB')
+    .db('peachletpages')
     .collection('comments')
     .updateOne({ _id: new ObjectId(commentId) }, { $set: updatedComment });
   if (result.matchedCount > 0) {
@@ -130,7 +130,7 @@ const remove = async (req, res) => {
   }
 
   const result = await client
-    .db('recipeCommentDB')
+    .db('peachletpages')
     .collection('comments')
     .deleteOne({ _id: new ObjectId(commentId) });
   if (result.deletedCount > 0) {
