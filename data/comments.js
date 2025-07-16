@@ -7,7 +7,7 @@ const getAll = async (req, res) => {
   try {
     const comments = await client
       .db('recipeCommentDB')
-      .collection('/comments.js')
+      .collection('comments.js')
       .find()
       .toArray();
     res.json({ comments });

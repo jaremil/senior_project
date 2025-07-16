@@ -15,7 +15,7 @@ const {
   create,
   update,
   remove,
-} = require('/comments');
+} = require('comments.js');
 
 
 commentsRouter.get('/', getAll);
