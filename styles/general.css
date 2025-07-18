@@ -202,8 +202,8 @@ nav ul li a {
   padding: 0.6em 1.2em;
   font-size: 19px;
   font-weight: 600;
-  color: white;
-  background-color: var(--base_color);
+  color: var(--base_color);
+  /* background-color: var(--base_color); */
   border: none;
   border-radius: 8px;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
@@ -212,13 +212,13 @@ nav ul li a {
 
 .scan-btn:hover {
   color: white;
-  background-color: var(--accent_color);
+  background-color: var(--base_color);
 }
 
-.scan-btn:disabled {
+/* .scan-btn:disabled {
   color: var(--base_color);
   background-color: white;
-}
+} */
 
 #copy-btn:disabled {
   display: none;
