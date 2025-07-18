@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Jade Miller" />
     <meta property="title" content="Peachlet Pages" />
-    <meta name="description" content="Scan recipe photos into a digital recipe book where you can share your recipes and make grocery lists.">
+    <meta name="description"
+        content="Scan recipe photos into a digital recipe book where you can share your recipes and make grocery lists.">
     <link rel="icon" href="images/favicon.ico" />
     <link rel="stylesheet" href="styles/general.css" />
     <link rel="stylesheet" href="styles/size.css" />
@@ -25,29 +26,29 @@
         </nav>
     </header>
 
-        <div class="container">
-            <h1>Upload an Image to Extract Text</h1>
+    <div class="container">
+        <h1>Upload an Image to Extract Text</h1>
 
-            <div class="file-upload">
-                <input type="file" id="file-input" accept="image/*">
-                <button id="process-btn" disabled>Process Image</button>
-            </div>
-
-            <div id="image-preview">
-                <img id="preview-img" src="" alt="Preview Image">
-            </div>
-
-            <div id="output">
-                <h2>Extracted Text:</h2>
-                <textarea id="text-output" rows="10" readonly></textarea>
-            </div>
-
-            <button id="copy-btn" disabled>Copy Text</button>
+        <div class="file-upload">
+            <input type="file" id="file-input" accept="image/*">
+                <button class="scan-btn" id="process-btn" disabled>Process Image</button>
         </div>
+
+        <div id="image-preview">
+          <img id="preview-img" src="images/image_preview.png" alt="Preview Image">
+
+        </div>
+
+        <div id="output">
+            <h2>Extracted Text:</h2>
+            <textarea id="text-output" rows="10" readonly></textarea>
+        </div>
+
+        <button id="copy-btn" disabled>Copy Text</button>
+    </div>
 
         <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.1/dist/tesseract.min.js"></script>
         <script src="scripts/ocr.js"></script>
+</body>
 
-
-    </body>
 </html>

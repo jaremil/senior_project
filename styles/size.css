@@ -30,4 +30,8 @@
   .search-container {
     width: 70%;
   }
+
+  h1 {
+    font-size: 200%;
+  }
 }
