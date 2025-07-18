@@ -29,14 +29,18 @@
     <div class="container">
         <h1>Upload an Image to Extract Text</h1>
 
-        <div class="file-upload">
+        <!-- <div class="file-upload">
             <input type="file" id="file-input" accept="image/*">
                 <button class="scan-btn" id="process-btn" disabled>Process Image</button>
+        </div> -->
+
+        <div class="file-upload">
+            <input type="file" id="file-input" accept="image/*" name="image">
+            <button class="scan-btn" id="process-btn" disabled>Process Image</button>
         </div>
 
         <div id="image-preview">
-          <img id="preview-img" src="images/image_preview.png" alt="Preview Image">
-
+            <img id="preview-img" src="images/image_preview.png" alt="Preview Image">
         </div>
 
         <div id="output">
@@ -47,8 +51,8 @@
         <button id="copy-btn" disabled>Copy Text</button>
     </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.1/dist/tesseract.min.js"></script>
-        <script src="scripts/ocr.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.1/dist/tesseract.min.js"></script>
+    <script src="scripts/ocr.js"></script>
+    <script src="./server.js"></script>
 </body>
-
 </html>

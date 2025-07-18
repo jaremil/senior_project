@@ -202,23 +202,23 @@ nav ul li a {
   padding: 0.6em 1.2em;
   font-size: 19px;
   font-weight: 600;
-  color: var(--base_color);
-  /* background-color: var(--base_color); */
+  color: white;
+  background-color: var(--base_color);
   border: none;
   border-radius: 8px;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 12px rgba(67, 67, 103, 0.146);
+  box-shadow: 0 4px 12px rgba(67, 67, 103, 0.298);
+}
+
+.scan-btn:disabled {
+  color: white;
+  background-color: var(--accent_color);
+    box-shadow: 0 4px 12px rgba(67, 67, 103, 0.146);
 }
 
 .scan-btn:hover {
-  color: white;
-  background-color: var(--base_color);
+  box-shadow: 0 4px 12px rgba(67, 67, 103, 0.429);
 }
-
-/* .scan-btn:disabled {
-  color: var(--base_color);
-  background-color: white;
-} */
 
 #copy-btn:disabled {
   display: none;
