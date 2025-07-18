@@ -179,3 +179,45 @@ nav ul li a {
   color: var(--accent_color);
   box-shadow: 0 4px 12px rgba(67, 67, 103, 0.298);
 }
+
+/* OCR */
+
+button {
+    padding: 10px 20px;
+    background-color: var(--base_color);
+    color: white;
+    border-radius: 4px;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(67, 67, 103, 0.146);
+}
+
+button:disabled {
+    background-color: #ffffff;
+    color: var(--base_color);
+    box-shadow: 0 4px 12px rgba(67, 67, 103, 0.146);
+}
+
+#image-preview {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#preview-img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    margin-top: 20px;
+}
+
+#output {
+    margin-top: 20px;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    resize: none;
+}
