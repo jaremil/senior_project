@@ -42,25 +42,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-
-
-// // file input change
-// fileInput.addEventListener("change", (e) => {
-//     const file = e.target.files[0];
+// file input change
+fileInput.addEventListener("change", (e) => {
+    const file = e.target.files[0];
     
-//     if (file && file.type.startsWith('image/')) {
-//         // preview
-//         const reader = new FileReader();
-//         reader.onload = function(event) {
-//             imagePreview.src = event.target.result;
-//         }
-//         reader.readAsDataURL(file);
+    if (file && file.type.startsWith('image/')) {
+        // preview
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            imagePreview.src = event.target.result;
+        }
+        reader.readAsDataURL(file);
         
-//         processBtn.disabled = false;
-//     } else {
-//         alert("Please upload an image file.");
-//     }
-// });
+        processBtn.disabled = false;
+    } else {
+        alert("Please upload an image file.");
+    }
+});
 
 // Process Image
 processBtn.addEventListener("click", () => {
