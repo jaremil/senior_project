@@ -196,7 +196,7 @@ nav ul li a {
 
 /* scan */
 
-.scan-btn {
+#process-btn {
   font-family: var(--body_font);
   display: inline-block;
   padding: 0.6em 1.2em;
@@ -207,24 +207,24 @@ nav ul li a {
   border: none;
   border-radius: 8px;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 12px rgba(67, 67, 103, 0.298);
-}
-
-.scan-btn:disabled {
-  color: white;
-  background-color: var(--accent_color);
-    box-shadow: 0 4px 12px rgba(67, 67, 103, 0.146);
-}
-
-.scan-btn:hover {
   box-shadow: 0 4px 12px rgba(67, 67, 103, 0.429);
 }
 
-#copy-btn:disabled {
-  display: none;
+#process-btn:disabled:hover  {
+  box-shadow: 0 4px 12px rgba(67, 67, 103, 0.146);
 }
 
-#copy-btn {
+#process-btn:disabled {
+  color: var(--base_color);
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(67, 67, 103, 0.146);
+}
+
+#process-btn:hover {
+  box-shadow: 0 4px 12px rgba(67, 67, 103, 0.604);
+}
+
+#clear-btn, #copy-btn {
   margin-bottom: 80px;
   font-family: var(--body_font);
   display: inline-block;
@@ -239,16 +239,11 @@ nav ul li a {
   box-shadow: 0 4px 12px rgba(67, 67, 103, 0.146);
 }
 
-#copy-btn:hover {
-  color: white;
-  background-color: var(--accent_color);
+#clear-btn:hover, #copy-btn:hover {
+  box-shadow: 0 4px 12px rgba(67, 67, 103, 0.604);
 }
 
-#copy-btn:disabled {
-  display: none;
-}
-
-.file-upload {
+#clear-btn:disabled:hover, #copy-btn:disabled:hover {
   color: var(--base_color);
 }
 

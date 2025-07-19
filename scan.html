@@ -26,12 +26,12 @@
         </nav>
     </header>
 
-    <div class="container">
+<div class="container">
         <h1>Upload an Image to Extract Text</h1>
 
         <div class="file-upload">
-            <input type="file" id="file-input" accept="image/*" name="image">
-            <button class="scan-btn" id="process-btn" disabled>Process Image</button>
+            <input type="file" id="file-input" accept="image/*">
+                <button id="process-btn" disabled>Process Image</button>
         </div>
 
         <div id="image-preview">
@@ -44,10 +44,12 @@
         </div>
 
         <button id="copy-btn" disabled>Copy Text</button>
+        <button id="clear-btn">Clear</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.1/dist/tesseract.min.js"></script>
     <script src="scripts/ocr.js"></script>
+    <script src="scripts/clear.js"></script>
     <script src="./server.js"></script>
 </body>
 </html>
