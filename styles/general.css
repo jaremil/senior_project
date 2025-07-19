@@ -393,3 +393,44 @@ textarea {
   padding: 10px;
   background: transparent;
 }
+
+.comments-section {
+  margin-top: 1rem;
+  border-top: 1px solid #ccc;
+  padding-top: 0.5rem;
+}
+
+.comments-section input {
+  width: 80%;
+  padding: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.comments-section button {
+  padding: 0.3rem 0.6rem;
+  margin-left: 0.25rem;
+}
+
+.comment-list {
+  list-style: disc;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+.l-btn {
+  margin-bottom: 80px;
+  font-family: var(--body_font);
+  display: inline-block;
+  padding: 0.6em 1.2em;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background-color: var(--base_color);
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(67, 67, 103, 0.146);
+}
+
+.l-btn:hover {
+  box-shadow: 0 4px 12px rgba(67, 67, 103, 0.604);
+}

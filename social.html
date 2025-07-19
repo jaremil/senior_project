@@ -61,31 +61,42 @@
     .then(data => {
       const groupRecipes = data.filter(recipe => recipe.isGroup === true);
 
-      function displayRecipes(recipesToDisplay) {
-        const list = document.getElementById('recipes');
-        list.innerHTML = '';
+function displayRecipes(recipesToDisplay) {
+  const list = document.getElementById('recipes');
+  list.innerHTML = '';
 
-        recipesToDisplay.forEach(recipe => {
-          const li = document.createElement('li');
-          li.innerHTML = `
-            <div class="recipe_display">
-              <strong>${recipe.recipeName}</strong>
-              <span>|</span>
-              <span>${recipe.userName}</span><br><br>
-              <strong>Ingredients:</strong>
-              <ul>
-                ${recipe.ingredients.map(ingredient => `
-                  <li>${ingredient.quantity} of ${ingredient.name}</li>
-                `).join('')}
-              </ul><br>
-              <strong>Instructions:</strong>
-              <p>${recipe.instructions}</p>
+  recipesToDisplay.forEach(recipe => {
+    const savedComments = JSON.parse(localStorage.getItem(`comments_${recipe.id}`)) || recipe.comments || [];
 
-            </div>
-          `;
-          list.appendChild(li);
-        });
-      }
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <div class="recipe_display">
+        <strong>${recipe.recipeName}</strong>
+        <span>|</span>
+        <span>${recipe.userName}</span><br><br>
+        <strong>Ingredients:</strong>
+        <ul>
+          ${recipe.ingredients.map(ingredient => `
+            <li>${ingredient.quantity} of ${ingredient.name}</li>
+          `).join('')}
+        </ul><br>
+        <strong>Instructions:</strong>
+        <p>${recipe.instructions}</p>
+
+        <div class="comments-section">
+          <strong>Comments:</strong>
+          <ul class="comment-list" id="comments-${recipe.id}">
+            ${savedComments.map(comment => `<li>${comment}</li>`).join('')}
+          </ul>
+          <input type="text" placeholder="Add a comment" id="comment-input-${recipe.id}" />
+          <button class="l-btn" onclick="addComment('${recipe.id}')">Post</button>
+        </div>
+      </div>
+    `;
+    list.appendChild(li);
+  });
+}
+
 
       function searchRecipes(recipeQuery, groupQuery) {
         const filtered = groupRecipes.filter(recipe => {
@@ -122,6 +133,26 @@
       displayRecipes(groupRecipes);
     })
     .catch(error => console.error('Error:', error));
+
+    function addComment(recipeId) {
+  const input = document.getElementById(`comment-input-${recipeId}`);
+  const commentText = input.value.trim();
+  if (!commentText) return;
+
+  const commentsKey = `comments_${recipeId}`;
+  const existingComments = JSON.parse(localStorage.getItem(commentsKey)) || [];
+
+  existingComments.push(commentText);
+  localStorage.setItem(commentsKey, JSON.stringify(existingComments));
+
+  const commentList = document.getElementById(`comments-${recipeId}`);
+  const newCommentEl = document.createElement('li');
+  newCommentEl.textContent = commentText;
+  commentList.appendChild(newCommentEl);
+
+  input.value = '';
+}
+
 </script>
   
 </body>
