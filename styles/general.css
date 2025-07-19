@@ -384,3 +384,12 @@ textarea {
 #groceryInput:hover {
   box-shadow: 0 4px 12px rgba(67, 67, 103, 0.298);
 }
+
+#groupSearchBar, #userSearchBar {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 10px;
+  background: transparent;
+}

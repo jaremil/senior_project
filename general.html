@@ -41,76 +41,89 @@
     </button>
   </div>
 
+  <div class="search-container">
+  <input type="text" placeholder="Search by group name..." id="groupSearchBar" />
+  <button class="search-button">
+    <img class="search-icon" src="images/searchicon.png" alt="Search Icon">
+  </button>
+</div>
+
   <ul id="recipes"></ul>
 
   <script>
-    fetch('/data/recipes.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to load JSON');
-        }
-        return response.json();
-      })
-      .then(data => {
-        const groupRecipes = data.filter(recipe => recipe.isGroup === true);
+  fetch('/data/recipes.json')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to load JSON');
+      }
+      return response.json();
+    })
+    .then(data => {
+      const groupRecipes = data.filter(recipe => recipe.isGroup === true);
 
-        // display recipes
-        function displayRecipes(recipesToDisplay) {
-          const list = document.getElementById('recipes');
-          list.innerHTML = '';
+      function displayRecipes(recipesToDisplay) {
+        const list = document.getElementById('recipes');
+        list.innerHTML = '';
 
-          recipesToDisplay.forEach(recipe => {
-            const li = document.createElement('li');
-            li.innerHTML = `
-              <div class="recipe_display">
+        recipesToDisplay.forEach(recipe => {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <div class="recipe_display">
               <strong>${recipe.recipeName}</strong>
               <span>|</span>
-              <span>${recipe.userName}</span><br>
-              <br>
-              <strong>Ingredients:</strong><br>
+              <span>${recipe.userName}</span><br><br>
+              <strong>Ingredients:</strong>
               <ul>
                 ${recipe.ingredients.map(ingredient => `
                   <li>${ingredient.quantity} of ${ingredient.name}</li>
                 `).join('')}
-              </ul>
-              <br>
-              <strong>Instructions:</strong><br>
+              </ul><br>
+              <strong>Instructions:</strong>
               <p>${recipe.instructions}</p>
-              </div>
-            `;
-            list.appendChild(li);
-          });
-        }
+              <br>
+              <strong>Group:</strong> ${recipe.groupName || 'None'}
+            </div>
+          `;
+          list.appendChild(li);
+        });
+      }
 
-        // search recipes
-        function searchRecipes(query) {
-          const filtered = groupRecipes.filter(recipe => {
-            const nameMatch = recipe.recipeName.toLowerCase().includes(query.toLowerCase());
-            const ingredientMatch = recipe.ingredients.some(ingredient =>
-              ingredient.name.toLowerCase().includes(query.toLowerCase())
-            );
-            return nameMatch || ingredientMatch;
-          });
+      function searchRecipes(recipeQuery, groupQuery) {
+        const filtered = groupRecipes.filter(recipe => {
+          const nameMatch = recipe.recipeName.toLowerCase().includes(recipeQuery);
+          const ingredientMatch = recipe.ingredients.some(ing =>
+            ing.name.toLowerCase().includes(recipeQuery)
+          );
+          const groupMatch = recipe.groupName?.toLowerCase().includes(groupQuery);
 
-          // To top
-          const sorted = filtered.sort((a, b) => {
-            const aMatch = a.recipeName.toLowerCase().includes(query.toLowerCase());
-            const bMatch = b.recipeName.toLowerCase().includes(query.toLowerCase());
-            return aMatch === bMatch ? 0 : aMatch ? -1 : 1;
-          });
-
-          displayRecipes(sorted);
-        }
-
-
-        document.getElementById('searchBar').addEventListener('input', (event) => {
-          const query = event.target.value.trim();
-          searchRecipes(query);
+          return (nameMatch || ingredientMatch) && groupMatch;
         });
 
-        displayRecipes(groupRecipes);
-      })
-      .catch(error => console.error('Error:', error));
-  </script>
+        const sorted = filtered.sort((a, b) => {
+          const aMatch = a.recipeName.toLowerCase().includes(recipeQuery);
+          const bMatch = b.recipeName.toLowerCase().includes(recipeQuery);
+          return aMatch === bMatch ? 0 : aMatch ? -1 : 1;
+        });
+
+        displayRecipes(sorted);
+      }
+
+      const searchBar = document.getElementById('searchBar');
+      const groupSearchBar = document.getElementById('groupSearchBar');
+
+      function handleSearch() {
+        const recipeQuery = searchBar.value.trim().toLowerCase();
+        const groupQuery = groupSearchBar.value.trim().toLowerCase();
+        searchRecipes(recipeQuery, groupQuery);
+      }
+
+      searchBar.addEventListener('input', handleSearch);
+      groupSearchBar.addEventListener('input', handleSearch);
+
+      displayRecipes(groupRecipes);
+    })
+    .catch(error => console.error('Error:', error));
+</script>
+
 </body>
 </html>
