@@ -4,45 +4,41 @@ const imagePreview = document.getElementById("preview-img");
 const outputText = document.getElementById("text-output");
 const copyBtn = document.getElementById("copy-btn");
 
-let selectedFile = null;
 
-fileInput.addEventListener("change", (e) => {
-    const file = e.target.files[0];
+document.addEventListener("DOMContentLoaded", () => {
+    const fileInput = document.getElementById("file-input");
+    const processBtn = document.getElementById("process-btn");
+    const imagePreview = document.getElementById("image-preview");
 
-    if (file && file.type.startsWith('image/')) {
-        selectedFile = file;
-        
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            imagePreview.src = event.target.result;
-        };
-        reader.readAsDataURL(file);
+    fileInput.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        if (file && file.type.startsWith("image/")) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                imagePreview.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+            processBtn.disabled = false;
+        }
+    });
 
-        processBtn.disabled = false;
-    } else {
-        alert("Please upload a valid image file.");
-        processBtn.disabled = true;
-    }
-});
+    processBtn.addEventListener("click", () => {
+        const file = fileInput.files[0];
+        const formData = new FormData();
+        formData.append("image", file);
 
-processBtn.addEventListener("click", () => {
-    if (!selectedFile) return;
-
-    const formData = new FormData();
-    formData.append("file", selectedFile);
-
-    fetch("/upload", {
-        method: "POST",
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Upload successful:", data);
-        alert("Image processed!");
-    })
-    .catch(error => {
-        console.error("Upload failed:", error);
-        alert("Failed to process the image.");
+        fetch("/upload", {
+            method: "POST",
+            body: formData,
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log("Upload response:", data);
+            alert("Image uploaded to: " + data.path);
+        })
+        .catch((err) => {
+            console.error("Error uploading:", err);
+        });
     });
 });
 

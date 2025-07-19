@@ -40,3 +40,23 @@ app.use('/', projectsRouter);
 
 // const { commentsRouter } = require('./data/connection.js'); 
 // app.use('/comments', commentsRouter);
+
+
+const multer = require("multer");
+const cors = require("cors");
+
+const port = process.env.PORT || 3000;
+
+const upload = multer({ dest: "uploads/" });
+
+app.use(cors());
+
+app.use(express.static("public"));
+
+app.post("/upload", upload.single("image"), (req, res) => {
+    const filePath = req.file.path;
+
+    res.json({ message: "Image uploaded", path: filePath });
+});
+
+app.listen(port, () => console.log(`Server running on port ${port}`));
