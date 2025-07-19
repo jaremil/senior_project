@@ -38,10 +38,6 @@ app.use(express.static('styles'));
 const projectsRouter = require('./data/routes.js')
 app.use('/', projectsRouter);
 
-// const { commentsRouter } = require('./data/connection.js'); 
-// app.use('/comments', commentsRouter);
-
-
 const multer = require("multer");
 const cors = require("cors");
 
@@ -58,46 +54,5 @@ app.post("/upload", upload.single("image"), (req, res) => {
 
     res.json({ message: "Image uploaded", path: filePath });
 });
-
-
-
-
-
-
-
-
-
-
-// app.use(express.json());
-
-// const RECIPES_FILE = './data/recipes.json';
-
-// // Load recipes
-// const loadRecipes = () => {
-//   const data = fs.readFileSync(RECIPES_FILE);
-//   return JSON.parse(data);
-// };
-
-// // Save recipes
-// const saveRecipes = (recipes) => {
-//   fs.writeFileSync(RECIPES_FILE, JSON.stringify(recipes, null, 2));
-// };
-
-// // Get all public recipes
-// app.get('/api/recipes', (req, res) => {
-//   const recipes = loadRecipes();
-//   const publicRecipes = recipes.filter(r => r.isPublic);
-//   res.json(publicRecipes);
-// });
-
-// // Add a new recipe
-// app.post('/api/recipes', (req, res) => {
-//   const recipes = loadRecipes();
-//   const newRecipe = req.body;
-//   newRecipe.id = `recipe${Date.now()}`; // basic ID generation
-//   recipes.push(newRecipe);
-//   saveRecipes(recipes);
-//   res.status(201).json(newRecipe);
-// });
 
 app.use(express.static(path.join(__dirname, 'public')));

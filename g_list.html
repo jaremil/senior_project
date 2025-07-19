@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Jade Miller" />
+  <meta property="title" content="Peachlet Pages" />
+  <meta name="description"
+    content="Scan recipe photos into a digital recipe book where you can share your recipes and make grocery lists.">
+  <link rel="icon" href="images/favicon.ico" />
+  <link rel="stylesheet" href="styles/general.css" />
+  <link rel="stylesheet" href="styles/size.css" />
+  <title>Peachlet Pages</title>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/start.html"> <img class="logo" src="images/logo.png" alt="Logo"></a></li>
+        <li><a class="navBar" href="/profile.html">Profile</a></li>
+        <li><a class="navBar" href="/list.html">Lists</a></li>
+        <li><a class="navBar" href="/scan.html">Scan Recipes</a></li>
+        <li><a class="navBar" href="/social.html">Social</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div id="center">
+    <button id="list-btn">
+      <li><a href="/list.html">Inventory List</a></li>
+    </button>
+    <button id="unlist-btn">
+      <li><a href="/g_list.html">Grocery List</a></li>
+    </button>
+
+    <h2>Grocery List</h2>
+    <input id="groceryInput" placeholder="Add groceries you want" />
+    <button id="list-btn"  onclick="addGrocery()">Add</button>
+    <ul id="groceryList"></ul>
+  </div>
+    <ul id="grocerysuggestedRecipes"></ul>
+
+  <script>
+    const groceryItems = [];
+    let recipes = [];
+
+    // add grocery list
+    function addGrocery() {
+      const input = document.getElementById("groceryInput");
+      const item = input.value.trim().toLowerCase();
+      if (item && !groceryItems.includes(item)) {
+        groceryItems.push(item);
+        updateList("groceryList", groceryItems);
+        input.value = '';
+        grocerysuggestRecipes();
+      }
+    }
+
+    function updateList(elementId, list) {
+      const ul = document.getElementById(elementId);
+      ul.innerHTML = '';
+      list.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        ul.appendChild(li);
+      });
+    }
+
+    function grocerysuggestRecipes() {
+      console.log("Grocery:", groceryItems);
+      console.log("Recipes:", recipes);
+
+      const suggestions = recipes.filter(recipe => {
+        const ingredientNames = recipe.ingredients.map(ing => ing.name.toLowerCase());
+        return ingredientNames.every(ing => groceryItems.includes(ing));
+      });
+
+      const ul = document.getElementById("grocerysuggestedRecipes");
+      ul.innerHTML = '';
+
+      if (suggestions.length === 0) {
+        ul.innerHTML = '<li>No recipes match your current grocery.</li>';
+        return;
+      }
+
+      // Display
+      suggestions.forEach(recipe => {
+        const li = document.createElement('li');
+        li.classList.add("recipe-card");
+
+        const ingredientList = recipe.ingredients.map(ing => `${ing.quantity} of ${ing.name}`).join(', ');
+
+        li.innerHTML = `
+              <div class="recipe_display">
+              <strong>${recipe.recipeName}</strong>
+              <span>|</span>
+              <span>${recipe.userName}</span><br>
+              <strong>Ingredients:</strong><br>
+              <ul>
+                ${recipe.ingredients.map(ingredient => `
+                  <li>${ingredient.quantity} of ${ingredient.name}</li>
+                `).join('')}
+              </ul>
+              <strong>Instructions:</strong><br>
+              <p>${recipe.instructions}</p>
+              </div>
+            `;
+        ul.appendChild(li);
+      });
+    }
+
+    fetch('data/recipes.json')
+      .then(response => {
+        if (!response.ok) throw new Error("Failed to load recipe data.");
+        return response.json();
+      })
+      .then(data => {
+        recipes = data;
+        console.log("Loaded recipes:", recipes);
+        suggestRecipes();
+      })
+      .catch(error => {
+        console.error("Error loading recipes:", error);
+      });
+  </script>
+</body>
+</html>

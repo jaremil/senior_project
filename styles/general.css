@@ -27,6 +27,10 @@ li {
   list-style-type: none;
 }
 
+a {
+  text-decoration: none;
+}
+
 /* Title Animation */
 
 .container {
@@ -300,4 +304,83 @@ textarea {
 
 .recipe_display, p {
   font-family: var(--body_font)
+}
+
+#unlist-btn {
+  margin-bottom: 80px;
+  font-family: var(--body_font);
+  display: inline-block;
+  padding: 0.6em 1.2em;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--base_color);
+  background-color: white;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(67, 67, 103, 0.146);
+}
+
+#unlist-btn a {
+  text-decoration: none;
+  color: var(--base_color);
+}
+
+#list-btn {
+  margin-bottom: 80px;
+  font-family: var(--body_font);
+  display: inline-block;
+  padding: 0.6em 1.2em;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background-color: var(--base_color);
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(67, 67, 103, 0.146);
+}
+
+#list-btn a {
+  text-decoration: none;
+  color: white;
+}
+
+#list-btn:hover {
+  box-shadow: 0 4px 12px rgba(67, 67, 103, 0.604);
+}
+
+#center {
+  margin-top: 50px;
+  padding-left: 50px;
+}
+
+#inventoryInput {
+  display: flex;
+  border: none;
+  width: 30%;
+  height: 40px;
+  background: #fff;
+  border-radius: 40px;
+  padding: 0px 0px 0px 8px;
+  box-shadow: 0 4px 12px rgba(67, 67, 103, 0.146);
+}
+
+#inventoryInput:hover {
+  box-shadow: 0 4px 12px rgba(67, 67, 103, 0.298);
+}
+
+#groceryInput {
+  display: flex;
+  border: none;
+  width: 30%;
+  height: 40px;
+  background: #fff;
+  border-radius: 40px;
+  padding: 0px 0px 0px 8px;
+  box-shadow: 0 4px 12px rgba(67, 67, 103, 0.146);
+}
+
+#groceryInput:hover {
+  box-shadow: 0 4px 12px rgba(67, 67, 103, 0.298);
 }

@@ -6,7 +6,7 @@ app.get('/comments', (req, res) => {
 });
 
 // Function to get all comments
- 
+
 const getAll = async (req, res) => {
   try {
     // Query the comments collection in peachletpage and convert results to an array
@@ -22,7 +22,7 @@ const getAll = async (req, res) => {
 };
 
 // Function to create comment
- 
+
 const create = async (req, res) => {
   // Validate required fields
   if (
@@ -66,13 +66,13 @@ const create = async (req, res) => {
 };
 
 // Function to update comment
- 
+
 const update = async (req, res) => {
   // Validate required fields
   if (
     !req.body.userId ||
     !req.body.recipeId ||
-    !req.body.commentComment 
+    !req.body.commentComment
   ) {
     return res.status(400).json({
       error:
@@ -101,7 +101,7 @@ const update = async (req, res) => {
 };
 
 // Function to delete comment
- 
+
 const remove = async (req, res) => {
   // Getting commentId from URL
   const commentId = req.params.id;

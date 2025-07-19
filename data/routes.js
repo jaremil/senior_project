@@ -30,11 +30,18 @@ routes.get('/start', (req, res) => {
 });
 
 //LOG OUT
+// routes.get('/logout', (req, res) => {
+//   req.logout(() => {
+//     res.redirect('/');
+//   });
+// });
+
 routes.get('/logout', (req, res) => {
   req.logout(() => {
-    res.redirect('/');
+    res.redirect('/logout.html');
   });
 });
+
 
 routes.get("/start.html", (req, res) => {
   if (!req.isAuthenticated()) {
@@ -76,6 +83,14 @@ routes.get("/general.html", (req, res) => {
   }
   
   res.sendFile(path.resolve(__dirname, '..', 'general.html'));
+});
+
+routes.get("/list.html", (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
+  
+  res.sendFile(path.resolve(__dirname, '..', 'list.html'));
 });
 
 module.exports = routes;
