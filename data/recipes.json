@@ -42,5 +42,161 @@
     "recipeBook": "Breakfast",
     "groupName": "Miller Family Chat",
     "comments": ["Who knew it could be so easy to cook?"]
+  },
+  {
+    "id": "recipe003",
+    "userName": "Sasha12",
+    "recipeName": "Grilled Cheese",
+    "ingredients": [
+      { "name": "Bread", "quantity": "2 slices" },
+      { "name": "Cheddar Cheese", "quantity": "2 slices" },
+      { "name": "Butter", "quantity": "1 tbsp" }
+    ],
+    "instructions": "Butter bread, add cheese, and grill until golden.",
+    "isPublic": true,
+    "isGroup": true,
+    "groupName": "Dorm Dinners",
+    "recipeBook": "Quick Meals",
+    "comments": ["Tried with gouda—so good!"]
+  },
+  {
+    "id": "recipe004",
+    "userName": "FoodieFrank",
+    "recipeName": "PB&J Sandwich",
+    "ingredients": [
+      { "name": "Bread", "quantity": "2 slices" },
+      { "name": "Peanut Butter", "quantity": "2 tbsp" },
+      { "name": "Jam", "quantity": "2 tbsp" }
+    ],
+    "instructions": "Spread PB on one slice, jam on the other, combine.",
+    "isPublic": true,
+    "isGroup": false,
+    "groupName": "",
+    "recipeBook": "Snacks",
+    "comments": []
+  },
+  {
+    "id": "recipe005",
+    "userName": "ChefLee",
+    "recipeName": "Spaghetti",
+    "ingredients": [
+      { "name": "Spaghetti", "quantity": "1 box" },
+      { "name": "Tomato Sauce", "quantity": "2 cups" }
+    ],
+    "instructions": "Boil pasta and add sauce.",
+    "isPublic": true,
+    "isGroup": true,
+    "groupName": "Italian Nights",
+    "recipeBook": "Dinner",
+    "comments": ["Add garlic for extra flavor!"]
+  },
+  {
+    "id": "recipe006",
+    "userName": "Nina",
+    "recipeName": "Fruit Salad",
+    "ingredients": [
+      { "name": "Apple", "quantity": "1 sliced" },
+      { "name": "Banana", "quantity": "1 sliced" },
+      { "name": "Grapes", "quantity": "1 cup" }
+    ],
+    "instructions": "Mix all fruits in a bowl.",
+    "isPublic": false,
+    "isGroup": true,
+    "groupName": "Healthy Habits",
+    "recipeBook": "Snacks",
+    "comments": []
+  },
+  {
+    "id": "recipe007",
+    "userName": "Marco",
+    "recipeName": "Avocado Toast",
+    "ingredients": [
+      { "name": "Bread", "quantity": "1 slice" },
+      { "name": "Avocado", "quantity": "1/2 mashed" }
+    ],
+    "instructions": "Toast bread and spread mashed avocado.",
+    "isPublic": true,
+    "isGroup": false,
+    "groupName": "",
+    "recipeBook": "Breakfast",
+    "comments": ["I like it with chili flakes."]
+  },
+  {
+    "id": "recipe008",
+    "userName": "Rachel",
+    "recipeName": "Omelette",
+    "ingredients": [
+      { "name": "Eggs", "quantity": "2" },
+      { "name": "Cheese", "quantity": "1/4 cup" },
+      { "name": "Spinach", "quantity": "1/4 cup" }
+    ],
+    "instructions": "Beat eggs, cook, and add fillings before folding.",
+    "isPublic": true,
+    "isGroup": true,
+    "groupName": "Miller Family Chat",
+    "recipeBook": "Breakfast",
+    "comments": []
+  },
+  {
+    "id": "recipe009",
+    "userName": "TomTom",
+    "recipeName": "Microwave Mac & Cheese",
+    "ingredients": [
+      { "name": "Macaroni", "quantity": "1 cup" },
+      { "name": "Milk", "quantity": "1/2 cup" },
+      { "name": "Cheese", "quantity": "1/2 cup" }
+    ],
+    "instructions": "Microwave pasta with water, stir in milk and cheese.",
+    "isPublic": false,
+    "isGroup": true,
+    "groupName": "Dorm Dinners",
+    "recipeBook": "Quick Meals",
+    "comments": ["Perfect late-night snack."]
+  },
+  {
+    "id": "recipe010",
+    "userName": "Luna",
+    "recipeName": "Smoothie",
+    "ingredients": [
+      { "name": "Banana", "quantity": "1" },
+      { "name": "Yogurt", "quantity": "1 cup" },
+      { "name": "Berries", "quantity": "1/2 cup" }
+    ],
+    "instructions": "Blend all ingredients until smooth.",
+    "isPublic": true,
+    "isGroup": false,
+    "groupName": "",
+    "recipeBook": "Drinks",
+    "comments": []
+  },
+  {
+    "id": "recipe011",
+    "userName": "Charlie",
+    "recipeName": "Cheese Quesadilla",
+    "ingredients": [
+      { "name": "Tortilla", "quantity": "1" },
+      { "name": "Cheese", "quantity": "1/2 cup" }
+    ],
+    "instructions": "Fold cheese into tortilla and grill until melted.",
+    "isPublic": true,
+    "isGroup": true,
+    "groupName": "Lunch Ideas",
+    "recipeBook": "Lunch",
+    "comments": ["Simple but tasty."]
+  },
+  {
+    "id": "recipe012",
+    "userName": "Brianna",
+    "recipeName": "Tomato Soup",
+    "ingredients": [
+      { "name": "Tomatoes", "quantity": "3 cups" },
+      { "name": "Garlic", "quantity": "2 cloves" }
+    ],
+    "instructions": "Simmer tomatoes and garlic, blend, and serve.",
+    "isPublic": true,
+    "isGroup": true,
+    "groupName": "Soup Club",
+    "recipeBook": "Dinner",
+    "comments": ["Goes great with grilled cheese!"]
   }
 ]
