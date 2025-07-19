@@ -155,7 +155,7 @@ nav ul li a {
   box-shadow: 0 4px 12px rgba(67, 67, 103, 0.298);
 }
 
-#searchBar {
+#searchBar, #bookSearchBar, #recipeName, #recipeBook, #ingredientsInput, #groupName {
   flex: 1;
   border: none;
   outline: none;
@@ -433,4 +433,16 @@ textarea {
 
 .l-btn:hover {
   box-shadow: 0 4px 12px rgba(67, 67, 103, 0.604);
+}
+
+.font {
+  font-family: var(--heading_font);
+}
+
+#recipeInstructions {
+  width: 90%;
+}
+
+.createRecipe {
+  margin-left: 2%;
 }

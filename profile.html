@@ -2,19 +2,18 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Jade Miller" />
-    <meta property="title" content="Peachlet Pages" />
-    <meta name="description"
-        content="Scan recipe photos into a digital recipe book where you can share your recipes and make grocery lists.">
-    <link rel="icon" href="images/favicon.ico" />
-    <link rel="stylesheet" href="styles/general.css" />
-    <link rel="stylesheet" href="styles/size.css" />
-    <title>Peachlet Pages</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Jade Miller" />
+  <meta property="title" content="Peachlet Pages" />
+  <meta name="description"
+    content="Scan recipe photos into a digital recipe book where you can share your recipes and make grocery lists.">
+  <link rel="icon" href="images/favicon.ico" />
+  <link rel="stylesheet" href="styles/general.css" />
+  <link rel="stylesheet" href="styles/size.css" />
+  <title>Peachlet Pages</title>
 </head>
 
-<body>
     <header>
         <nav>
             <ul>
@@ -27,85 +26,150 @@
         </nav>
     </header>
 
-    <div class="search-container">
+  <div class="search-container">
     <input type="text" placeholder="search for ideas here..." id="searchBar" />
-    <button class="search-button"> <img class="search-icon" src="images/searchicon.png" alt="Search Icon">
+    <button class="search-button">
+      <img class="search-icon" src="images/searchicon.png" alt="Search Icon">
     </button>
+  </div>
+
+  <div class="search-container">
+    <input type="text" placeholder="filter by book name..." id="bookSearchBar" />
+    <button class="search-button">
+      <img class="search-icon" src="images/searchicon.png" alt="Search Icon">
+    </button>
+  </div>
+
+  <div class="createRecipe">
+    <h3>Create a Recipe</h3>
+    <input type="text" id="recipeName" placeholder="Recipe name">
+    <input type="text" id="recipeBook" placeholder="Book name">
+    <input type="text" id="groupName" placeholder="Group name">
+    <input type="text" id="ingredientsInput" placeholder="Ingredients ">
+    <textarea id="recipeInstructions" placeholder="Instructions"></textarea>
+    <button class="l-btn" onclick="createRecipe()">Add Recipe</button>
   </div>
 
   <ul id="recipes"></ul>
 
   <script>
+    const STORAGE_KEY = 'user_recipes';
+    let jsonRecipes = [];
+    let allRecipes = [];
+
+    function loadRecipes() {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    }
+
+    function saveRecipes(recipes) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(recipes));
+    }
+
+    function displayRecipes(recipesToDisplay) {
+      const list = document.getElementById('recipes');
+      list.innerHTML = '';
+
+      recipesToDisplay.forEach((recipe, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <summary><strong class="font">${recipe.recipeBook || 'Unsorted'}</strong></summary>
+          <div class="recipe_display">
+            <strong>${recipe.recipeName}</strong> <span>|</span> ${recipe.userName}<br><br>
+            <strong>Ingredients:</strong>
+            <ul>
+              ${recipe.ingredients.map(ing => `<li>${ing.quantity} of ${ing.name}</li>`).join('')}
+            </ul><br>
+            <strong>Instructions:</strong>
+            <p>${recipe.instructions}</p>
+            <button class="l-btn" onclick="deleteRecipe(${index})">Delete Recipe</button>
+          </div>
+        `;
+        list.appendChild(li);
+      });
+    }
+
+    function createRecipe() {
+      const name = document.getElementById('recipeName').value.trim();
+      const book = document.getElementById('recipeBook').value.trim();
+      const instructions = document.getElementById('recipeInstructions').value.trim();
+      const ingredientsRaw = document.getElementById('ingredientsInput').value.trim();
+
+      if (!name || !ingredientsRaw) {
+        alert("Recipe name and ingredients required.");
+        return;
+      }
+
+      const ingredients = ingredientsRaw.split(',').map(item => {
+        const [quantity, ...nameParts] = item.trim().split(' of ');
+        return {
+          quantity: quantity.trim(),
+          name: nameParts.join(' of ').trim()
+        };
+      });
+
+      const recipe = {
+        id: Date.now().toString(),
+        userName: "JJ",
+        recipeName: name,
+        ingredients,
+        instructions,
+        isPublic: true,
+        isGroup: false,
+        groupName: "", 
+        recipeBook: book,
+        comments: []
+      };
+
+      const local = loadRecipes();
+      local.push(recipe);
+      saveRecipes(local);
+
+      allRecipes = [...jsonRecipes, ...local];
+      displayRecipes(allRecipes);
+    }
+
+    function deleteRecipe(index) {
+      const local = loadRecipes();
+      if (confirm("Are you sure you want to delete this recipe?")) {
+        local.splice(index - jsonRecipes.length, 1);
+        saveRecipes(local);
+        allRecipes = [...jsonRecipes, ...local];
+        displayRecipes(allRecipes);
+      }
+    }
+
+    function combinedSearch() {
+      const nameQuery = document.getElementById('searchBar').value.trim().toLowerCase();
+      const bookQuery = document.getElementById('bookSearchBar').value.trim().toLowerCase();
+
+      const filtered = allRecipes.filter(recipe => {
+        const matchesName = nameQuery === "" || (
+          recipe.recipeName.toLowerCase().includes(nameQuery) ||
+          recipe.ingredients.some(ing => ing.name.toLowerCase().includes(nameQuery))
+        );
+
+        const matchesGroup = bookQuery === "" || recipe.recipeBook.toLowerCase().includes(bookQuery);
+
+        return matchesName && matchesGroup;
+      });
+
+      displayRecipes(filtered);
+    }
+
+    document.getElementById('searchBar').addEventListener('input', combinedSearch);
+    document.getElementById('bookSearchBar').addEventListener('input', combinedSearch);
+
     fetch('/data/recipes.json')
       .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to load JSON');
-        }
+        if (!response.ok) throw new Error('Failed to load JSON');
         return response.json();
       })
       .then(data => {
-        const user = data.filter(recipe => recipe.userName === "JJ");
-
-        // display recipes
-        function displayRecipes(recipesToDisplay) {
-          const list = document.getElementById('recipes');
-          list.innerHTML = '';
-
-          recipesToDisplay.forEach(recipe => {
-            const li = document.createElement('li');
-            li.innerHTML = `
-            <details>
-            <summary><strong>${recipe.recipeBook}</strong></summary>
-              <div class="recipe_display">
-              <strong>${recipe.recipeName}</strong>
-              <span>|</span>
-              <span>${recipe.userName}</span><br>
-              <br>
-              <strong>Ingredients:</strong><br>
-              <ul>
-                ${recipe.ingredients.map(ingredient => `
-                  <li>${ingredient.quantity} of ${ingredient.name}</li>
-                `).join('')}
-              </ul>
-              <br>
-              <strong>Instructions:</strong><br>
-              <p>${recipe.instructions}</p>
-              </div>
-              </details>
-            `;
-            list.appendChild(li);
-          });
-        }
-
-        // search recipes
-        function searchRecipes(query) {
-          const filtered = user.filter(recipe => {
-            const nameMatch = recipe.recipeName.toLowerCase().includes(query.toLowerCase());
-            const ingredientMatch = recipe.ingredients.some(ingredient =>
-              ingredient.name.toLowerCase().includes(query.toLowerCase())
-            );
-            return nameMatch || ingredientMatch;
-          });
-
-          // To top
-          const sorted = filtered.sort((a, b) => {
-            const aMatch = a.recipeName.toLowerCase().includes(query.toLowerCase());
-            const bMatch = b.recipeName.toLowerCase().includes(query.toLowerCase());
-            return aMatch === bMatch ? 0 : aMatch ? -1 : 1;
-          });
-
-          displayRecipes(sorted);
-        }
-
-
-        document.getElementById('searchBar').addEventListener('input', (event) => {
-          const query = event.target.value.trim();
-          searchRecipes(query);
-        });
-
-        displayRecipes(user);
+        jsonRecipes = data.filter(recipe => recipe.userName === "JJ");
+        const localRecipes = loadRecipes();
+        allRecipes = [...jsonRecipes, ...localRecipes];
+        displayRecipes(allRecipes);
       })
       .catch(error => console.error('Error:', error));
   </script>
 </body>
-</html>
