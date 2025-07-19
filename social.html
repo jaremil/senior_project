@@ -2,54 +2,114 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Jade Miller" />
-    <meta property="title" content="Peachlet Pages" />
-    <meta name="description" content="Scan recipe photos into a digital recipe book where you can share your recipes and make grocery lists.">
-    <link rel="icon" href="images/favicon.ico" />
-    <link rel="stylesheet" href="styles/general.css" />
-    <link rel="stylesheet" href="styles/size.css" />
-    <script src="data/comments.js" defer></script>
-    <script src="data/comments.routes.js" defer></script>
-    <script src="data/connection.js" defer></script>
-    <script src="data/db.config.js" defer></script>
-    <script src="data/google_auth.js" defer></script>
-    <script src="data/pp.playground.mongodb.js" defer></script>
-    <script src="data/routes.js" defer></script>
-    <script src="scripts/refresh.js" defer></script>
-    <script src="scripts/script.js" defer></script>
-    <title>Peachlet Pages</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Jade Miller" />
+  <meta property="title" content="Peachlet Pages" />
+  <meta name="description"
+    content="Scan recipe photos into a digital recipe book where you can share your recipes and make grocery lists.">
+  <link rel="icon" href="images/favicon.ico" />
+  <link rel="stylesheet" href="styles/general.css" />
+  <link rel="stylesheet" href="styles/size.css" />
+  <script src="data/comments.js" defer></script>
+  <script src="data/comments.routes.js" defer></script>
+  <script src="data/connection.js" defer></script>
+  <script src="data/db.config.js" defer></script>
+  <script src="data/google_auth.js" defer></script>
+  <script src="data/pp.playground.mongodb.js" defer></script>
+  <script src="data/routes.js" defer></script>
+  <script src="scripts/script.js" defer></script>
+  <title>Peachlet Pages</title>
 </head>
 
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="/start.html"> <img class="logo" src="images/logo.png" alt="Logo"></a></li>
-                <li><a class="navBar" href="/profile.html">Profile</a></li>
-                <li><a class="navBar" href="/scan.html">Scan Recipes</a></li>
-                <li><a class="navBar" href="/social.html">Social</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/start.html"> <img class="logo" src="images/logo.png" alt="Logo"></a></li>
+        <li><a class="navBar" href="/profile.html">Profile</a></li>
+        <li><a class="navBar" href="/scan.html">Scan Recipes</a></li>
+        <li><a class="navBar" href="/general.html">Group Chats</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <div class="search-container">
-        <input type="text" placeholder="search for ideas here..." class="search-input" />
-        <button class="search-button"> <img class="search-icon" src="images/searchicon.png" alt="Search Icon">
-        </button>
-    </div>
+  <div class="search-container">
+    <input type="text" placeholder="search for ideas here..." id="searchBar" />
+    <button class="search-button"> <img class="search-icon" src="images/searchicon.png" alt="Search Icon">
+    </button>
+  </div>
 
-    <ul id="commentList"></ul>
+  <ul id="recipes"></ul>
 
-    <ul id="commentList"></ul>
+  <script>
+    fetch('/data/recipes.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to load JSON');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const publicRecipes = data.filter(recipe => recipe.isPublic === true);
 
-    <form class="search-container" id="commentForm">
-        <input class="search-input" type="text" id="userId" placeholder="User ID" required />
-        <input class="search-input" type="text" id="recipeId" placeholder="Recipe ID" required />
-        <input class="search-input"  type="text" id="commentComment" placeholder="Comment" required />
-        <button class="search-button" type="submit"><img class="search-icon" src="images/plus.png" alt="Search Icon"></button>
-    </form>
-    
+        // display recipes
+        function displayRecipes(recipesToDisplay) {
+          const list = document.getElementById('recipes');
+          list.innerHTML = '';
+
+          recipesToDisplay.forEach(recipe => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+              <div class="recipe_display">
+              <strong>${recipe.recipeName}</strong>
+              <span>|</span>
+              <span>${recipe.userName}</span><br>
+              <br>
+              <strong>Ingredients:</strong><br>
+              <ul>
+                ${recipe.ingredients.map(ingredient => `
+                  <li>${ingredient.quantity} of ${ingredient.name}</li>
+                `).join('')}
+              </ul>
+              <br>
+              <strong>Instructions:</strong><br>
+              <p>${recipe.instructions}</p>
+              </div>
+            `;
+            list.appendChild(li);
+          });
+        }
+
+        // search recipes
+        function searchRecipes(query) {
+          const filtered = publicRecipes.filter(recipe => {
+            const nameMatch = recipe.recipeName.toLowerCase().includes(query.toLowerCase());
+            const ingredientMatch = recipe.ingredients.some(ingredient =>
+              ingredient.name.toLowerCase().includes(query.toLowerCase())
+            );
+            return nameMatch || ingredientMatch;
+          });
+
+          // To top
+          const sorted = filtered.sort((a, b) => {
+            const aMatch = a.recipeName.toLowerCase().includes(query.toLowerCase());
+            const bMatch = b.recipeName.toLowerCase().includes(query.toLowerCase());
+            return aMatch === bMatch ? 0 : aMatch ? -1 : 1;
+          });
+
+          displayRecipes(sorted);
+        }
+
+
+        document.getElementById('searchBar').addEventListener('input', (event) => {
+          const query = event.target.value.trim();
+          searchRecipes(query);
+        });
+
+        displayRecipes(publicRecipes);
+      })
+      .catch(error => console.error('Error:', error));
+  </script>
 </body>
 </html>

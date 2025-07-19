@@ -70,4 +70,12 @@ routes.get("/social.html", (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'social.html'));
 });
 
+routes.get("/general.html", (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
+  
+  res.sendFile(path.resolve(__dirname, '..', 'general.html'));
+});
+
 module.exports = routes;

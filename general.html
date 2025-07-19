@@ -2,31 +2,39 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Jade Miller" />
-    <meta property="title" content="Peachlet Pages" />
-    <meta name="description"
-        content="Scan recipe photos into a digital recipe book where you can share your recipes and make grocery lists.">
-    <link rel="icon" href="images/favicon.ico" />
-    <link rel="stylesheet" href="styles/general.css" />
-    <link rel="stylesheet" href="styles/size.css" />
-    <title>Peachlet Pages</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Jade Miller" />
+  <meta property="title" content="Peachlet Pages" />
+  <meta name="description"
+    content="Scan recipe photos into a digital recipe book where you can share your recipes and make grocery lists.">
+  <link rel="icon" href="images/favicon.ico" />
+  <link rel="stylesheet" href="styles/general.css" />
+  <link rel="stylesheet" href="styles/size.css" />
+  <script src="data/comments.js" defer></script>
+  <script src="data/comments.routes.js" defer></script>
+  <script src="data/connection.js" defer></script>
+  <script src="data/db.config.js" defer></script>
+  <script src="data/google_auth.js" defer></script>
+  <script src="data/pp.playground.mongodb.js" defer></script>
+  <script src="data/routes.js" defer></script>
+  <script src="scripts/script.js" defer></script>
+  <title>Peachlet Pages</title>
 </head>
 
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="/start.html"> <img class="logo" src="images/logo.png" alt="Logo"></a></li>
-                <li><a class="navBar" href="/profile.html">Profile</a></li>
-                <li><a class="navBar" href="/scan.html">Scan Recipes</a></li>
-                <li><a class="navBar" href="/social.html">Social</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="search-container">
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/start.html"> <img class="logo" src="images/logo.png" alt="Logo"></a></li>
+        <li><a class="navBar" href="/profile.html">Profile</a></li>
+        <li><a class="navBar" href="/scan.html">Scan Recipes</a></li>
+        <li><a class="navBar" href="/social.html">Public Feed</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+ <div class="search-container">
     <input type="text" placeholder="search for ideas here..." id="searchBar" />
     <button class="search-button"> <img class="search-icon" src="images/searchicon.png" alt="Search Icon">
     </button>
@@ -43,7 +51,7 @@
         return response.json();
       })
       .then(data => {
-        const user = data.filter(recipe => recipe.userName === "JJ");
+        const groupRecipes = data.filter(recipe => recipe.isGroup === true);
 
         // display recipes
         function displayRecipes(recipesToDisplay) {
@@ -53,8 +61,6 @@
           recipesToDisplay.forEach(recipe => {
             const li = document.createElement('li');
             li.innerHTML = `
-            <details>
-            <summary><strong>${recipe.recipeBook}</strong></summary>
               <div class="recipe_display">
               <strong>${recipe.recipeName}</strong>
               <span>|</span>
@@ -70,7 +76,6 @@
               <strong>Instructions:</strong><br>
               <p>${recipe.instructions}</p>
               </div>
-              </details>
             `;
             list.appendChild(li);
           });
@@ -78,7 +83,7 @@
 
         // search recipes
         function searchRecipes(query) {
-          const filtered = user.filter(recipe => {
+          const filtered = groupRecipes.filter(recipe => {
             const nameMatch = recipe.recipeName.toLowerCase().includes(query.toLowerCase());
             const ingredientMatch = recipe.ingredients.some(ingredient =>
               ingredient.name.toLowerCase().includes(query.toLowerCase())
@@ -102,7 +107,7 @@
           searchRecipes(query);
         });
 
-        displayRecipes(user);
+        displayRecipes(groupRecipes);
       })
       .catch(error => console.error('Error:', error));
   </script>

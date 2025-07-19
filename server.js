@@ -59,4 +59,45 @@ app.post("/upload", upload.single("image"), (req, res) => {
     res.json({ message: "Image uploaded", path: filePath });
 });
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
+
+
+
+
+
+
+
+
+
+// app.use(express.json());
+
+// const RECIPES_FILE = './data/recipes.json';
+
+// // Load recipes
+// const loadRecipes = () => {
+//   const data = fs.readFileSync(RECIPES_FILE);
+//   return JSON.parse(data);
+// };
+
+// // Save recipes
+// const saveRecipes = (recipes) => {
+//   fs.writeFileSync(RECIPES_FILE, JSON.stringify(recipes, null, 2));
+// };
+
+// // Get all public recipes
+// app.get('/api/recipes', (req, res) => {
+//   const recipes = loadRecipes();
+//   const publicRecipes = recipes.filter(r => r.isPublic);
+//   res.json(publicRecipes);
+// });
+
+// // Add a new recipe
+// app.post('/api/recipes', (req, res) => {
+//   const recipes = loadRecipes();
+//   const newRecipe = req.body;
+//   newRecipe.id = `recipe${Date.now()}`; // basic ID generation
+//   recipes.push(newRecipe);
+//   saveRecipes(recipes);
+//   res.status(201).json(newRecipe);
+// });
+
+app.use(express.static(path.join(__dirname, 'public')));

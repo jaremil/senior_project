@@ -1,0 +1,46 @@
+[
+  {
+    "id": "recipe001",
+    "userName": "JJ",
+    "recipeName": "Pancakes",
+    "ingredients": [
+      { "name": "Flour", "quantity": "2 cups" },
+      { "name": "Milk", "quantity": "1 cup" }
+    ],
+    "instructions": "Mix and cook on a skillet.",
+    "isPublic": true,
+    "isGroup": true,
+    "groupName": "Miller Family Chat",
+    "recipeBook": "Breakfast",
+    "comments": []
+  },
+    {
+    "id": "recipe001",
+    "userName": "Nick24",
+    "recipeName": "Cereal",
+    "ingredients": [
+      { "name": "Cereal", "quantity": "2 cups" },
+      { "name": "Milk", "quantity": "1 cup" }
+    ],
+    "instructions": "Pour into a bowl.",
+    "isPublic": true,
+    "isGroup": true,
+    "groupName": "Miller Family Chat",
+    "recipeBook": "",
+    "comments": ["My favorite ceral is the chocolate puffs."]
+  },
+    {
+    "id": "recipe002",
+    "userName": "JJ",
+    "recipeName": "Glass of Milk",
+    "ingredients": [
+      { "name": "Milk", "quantity": "1 cup" }
+    ],
+    "instructions": "Carefully, pour milk into glass.",
+    "isPublic": true,
+    "isGroup": true,
+    "recipeBook": "Breakfast",
+    "groupName": "Miller Family Chat",
+    "comments": ["Who knew it could be so easy to cook?"]
+  }
+]

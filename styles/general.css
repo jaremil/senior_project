@@ -23,6 +23,10 @@ p {
   font-family: var(--body_font)
 }
 
+li {
+  list-style-type: none;
+}
+
 /* Title Animation */
 
 .container {
@@ -147,7 +151,7 @@ nav ul li a {
   box-shadow: 0 4px 12px rgba(67, 67, 103, 0.298);
 }
 
-.search-input {
+#searchBar {
   flex: 1;
   border: none;
   outline: none;
@@ -283,4 +287,17 @@ textarea {
   border-radius: 4px;
   font-size: 16px;
   resize: none;
+}
+
+.recipe_display {
+  border: 1px solid #ddd;
+  width: 50%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 5%;
+  margin: auto;
+}
+
+.recipe_display, p {
+  font-family: var(--body_font)
 }
