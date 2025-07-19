@@ -243,10 +243,6 @@ nav ul li a {
   box-shadow: 0 4px 12px rgba(67, 67, 103, 0.604);
 }
 
-#clear-btn:disabled:hover, #copy-btn:disabled:hover {
-  color: var(--base_color);
-}
-
 #image-preview {
   text-align: center;
   margin-top: 20px;
