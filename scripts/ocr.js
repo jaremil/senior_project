@@ -4,23 +4,67 @@ const imagePreview = document.getElementById("preview-img");
 const outputText = document.getElementById("text-output");
 const copyBtn = document.getElementById("copy-btn");
 
-// file input change
+let selectedFile = null;
+
 fileInput.addEventListener("change", (e) => {
     const file = e.target.files[0];
-    
+
     if (file && file.type.startsWith('image/')) {
-        // preview
+        selectedFile = file;
+        
         const reader = new FileReader();
         reader.onload = function(event) {
             imagePreview.src = event.target.result;
-        }
+        };
         reader.readAsDataURL(file);
-        
+
         processBtn.disabled = false;
     } else {
-        alert("Please upload an image file.");
+        alert("Please upload a valid image file.");
+        processBtn.disabled = true;
     }
 });
+
+processBtn.addEventListener("click", () => {
+    if (!selectedFile) return;
+
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+
+    fetch("/upload", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Upload successful:", data);
+        alert("Image processed!");
+    })
+    .catch(error => {
+        console.error("Upload failed:", error);
+        alert("Failed to process the image.");
+    });
+});
+
+
+
+// // file input change
+// fileInput.addEventListener("change", (e) => {
+//     const file = e.target.files[0];
+    
+//     if (file && file.type.startsWith('image/')) {
+//         // preview
+//         const reader = new FileReader();
+//         reader.onload = function(event) {
+//             imagePreview.src = event.target.result;
+//         }
+//         reader.readAsDataURL(file);
+        
+//         processBtn.disabled = false;
+//     } else {
+//         alert("Please upload an image file.");
+//     }
+// });
 
 // Process Image
 processBtn.addEventListener("click", () => {

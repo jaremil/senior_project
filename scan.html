@@ -26,13 +26,20 @@
         </nav>
     </header>
 
-<div class="container">
+    <div class="container">
         <h1>Upload an Image to Extract Text</h1>
+
+        <!-- <div class="file-upload">
+            <input type="file" id="file-input" accept="image/*">
+                <button id="process-btn" disabled>Process Image</button>
+        </div> -->
 
         <div class="file-upload">
             <input type="file" id="file-input" accept="image/*">
-                <button id="process-btn" disabled>Process Image</button>
+            <button id="process-btn" disabled>Process Image</button>
+            <img id="image-preview" />
         </div>
+
 
         <div id="image-preview">
             <img id="preview-img" src="images/image_preview.png" alt="Preview Image">
@@ -52,4 +59,5 @@
     <script src="scripts/clear.js"></script>
     <script src="./server.js"></script>
 </body>
+
 </html>
